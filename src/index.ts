@@ -18,7 +18,9 @@ export function parseCommand(line: string): string {
  * @param name Name of the driver to be registered
  */
 export function registerDriver(drivers: Array<Driver>, name: string): Array<Driver> {
-    return;
+    const newDriver = new Driver;
+    newDriver.name = name;
+    return [...drivers, newDriver];
 }
 
 /**
