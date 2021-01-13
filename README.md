@@ -6,6 +6,10 @@
 
 [2. Trips and Drivers](#trips-and-drivers)
 
+[3. Representing time](#representing-time)
+
+[4. Testing](#testing)
+
 ## TypeScript and Jest
 
 I chose to complete this problem using TypeScript because it is a language I can quickly write and iterate in, and I have a good understanding of the style rules and idioms which will best demonstrate my ability. Additionally, I believe having strongly typed data helps reinforce deliberate and precise code.
@@ -20,4 +24,12 @@ I took this consideration not necessarily because it fulfills requirements of th
 
 Another consideration was adding a simple function in the Trip class to tell us if it is a valid Trip. In this example, the qualifications for a valid Trip are that the speed is between 5 and 100mph, however if these requirements were to change or expand in the future, it's nice to be able to make those changes in one place. This way we can parse the Trip commands into Trip objects, and then add them to our array only if they pass the isValid() requirements.
 
+## Representing time
+
+Anything time-related would take a bit of copnsideration in any project. For this example, the smallest denomination of time in the input is minutes, which I decided to store time in minutes. This could result in confusion when calculating miles/hour, so I made sure to take that into consideration when writing my test cases.
+
 ## Testing
+
+For this project I decided to use TDD; writing function definitions first, writing test cases second, and then implementing the functions to pass the tests. This development model cuts down on many simple mistakes, and writing tests first ensures that you consider the problem before writing any code.
+
+For the tests themselves, I made sure to consider normal cases and boundary cases, e.g. the function isValid is tested against a normal speed, 60mph, speeds near our boundaries, 4.999mph, 5mph, 100mph, 100.001mph, and far outside our boundaries, -60mph, 999999mph.
