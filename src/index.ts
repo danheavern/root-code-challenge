@@ -6,8 +6,11 @@ import { Driver, Trip } from "./model";
  * @param line One line of input
  */
 export function parseCommand(line: string): string {
-    return;
-}
+    switch (line.split(' ')[0]) {
+        case DRIVER_COMMAND: return DRIVER_COMMAND
+        case TRIP_COMMAND: return TRIP_COMMAND
+        default: return null 
+    }}
 
 /**
  * Returns given array with new driver appended
