@@ -26,7 +26,7 @@ Another consideration was adding a simple function in the Trip class to tell us 
 
 ## Representing time
 
-Anything time-related would take a bit of copnsideration in any project. For this example, the smallest denomination of time in the input is minutes, which I decided to store time in minutes. This could result in confusion when calculating miles/hour, so I made sure to take that into consideration when writing my test cases.
+Anything time-related would take a bit of copnsideration in any project. For this example, the smallest denomination of time in the input is minutes, which I decided to store time in minutes. This could result in confusion when calculating miles/hour, so I made sure to take that into consideration when writing my test cases. As an additional measure, I included Trip.speed as a getter which calculates the speed. Having this done in a getter, which is tested, further protects from conversion errors.
 
 ## Testing
 
