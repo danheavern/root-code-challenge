@@ -31,5 +31,7 @@ export class Driver {
      * Updates *milesDriven*, adding *miles* to the total 
      * @param miles miles to be added
      */
-    updateMilesDriven(miles: number){}
+    updateMilesDriven(miles: number){
+        this.milesDriven ? this.milesDriven+= miles : this.milesDriven = miles;
+    }
 }
