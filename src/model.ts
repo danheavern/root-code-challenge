@@ -7,7 +7,9 @@ export class Trip {
     /**
      * Returns true if 5mph <= speed <= 100mph
      */
-    isValid(){}
+    isValid(): Boolean {
+        return this.dist / (this.end - this.start) <= 100 && this.dist / (this.end - this.start) >= 5;
+    }
 }
 
 export class Driver {
