@@ -4,6 +4,18 @@ export class Trip {
     end: number;        //end time in minutes
     dist: number;       //distance travelled in miles
 
+    constructor (
+        driverName: string, //name of driver
+        start: number,      //start time in minutes
+        end: number,        //end time in minutes
+        dist: number       //distance travelled in miles
+    ) {
+        this.driverName = driverName;
+        this.start = start;
+        this.end = end;
+        this.dist = dist;
+    }
+
     /**
      * Returns true if 5mph <= speed <= 100mph
      */
