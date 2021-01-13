@@ -12,8 +12,8 @@ export class Trip {
 
 export class Driver {
     name: string;
-    milesDriven: number;    //total miles driven
-    avgSpeed: number;       //average speed in mph
+    milesDriven?: number;    //total miles driven
+    avgSpeed?: number;       //average speed in mph
 
     /**
      * Update avgSpeed using a new trip speed
