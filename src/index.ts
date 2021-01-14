@@ -4,6 +4,9 @@ import * as readline from 'readline';
 
 main();
 
+//sort function to sort Drivers in order of descending miles driven
+export const sortByDescendingMiles = (a: Driver, b: Driver) => b.milesDriven - a.milesDriven;
+
 /**
  * Returns the command used in a given line of input, and null if there is no valid command
  * @param line One line of input
@@ -77,15 +80,26 @@ export function updateDrivers(drivers: Array<Driver>, trip: Trip): Array<Driver>
     return drivers.map(d => d.name === tripDriver.name ? tripDriver : d);
 }
 
+/**
+ * Generates a single line of the report for a given Driver
+ * @param driver Driver to generate report line for
+ */
+export function generateLine(driver: Driver): string {
+    if(driver.milesDriven > 0) {
+        return `${driver.name}: ${Math.round(driver.milesDriven)} miles @ ${Math.round(driver.avgSpeed)} mph`;
+    } else {
+        return `${driver.name}: 0 miles`;
+    }
+}
+
+/**
+ * Writes formatted text to console
+ */
 export function generateReport(drivers: Array<Driver>) {
-    drivers.sort((a, b) => b.milesDriven - a.milesDriven);
+    drivers.sort(sortByDescendingMiles);
     drivers.forEach(driver => {
-        if(driver.milesDriven > 0) {
-            console.log(`${driver.name}: ${Math.round(driver.milesDriven)} miles @ ${Math.round(driver.avgSpeed)} mph`);
-        } else {
-            console.log(`${driver.name}: 0 miles`);
-        }
-    })
+       console.log(generateLine(driver));
+    });
 }
 
 export default function main() {
