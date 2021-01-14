@@ -75,12 +75,20 @@ describe('Driver class', () => {
         expect(driver.name).toEqual('Test');
         expect(driver.milesDriven).toEqual(120);
     });
-    test('updateAvgSpeed sets avgSpeed when previously undefined', () => {
+    test('updateAvgSpeed sets avgSpeed to trip speed when milesDriven == trip.dist', () => {
         const driver = new Driver('Test');
+        const trip = new Trip('Test', 0, 60, 60)
         driver.name = 'Test';
         driver.updateMilesDriven(60);
-        driver.updateAvgSpeed(new Trip('Test', 0, 60, 60));
-        expect(driver.avgSpeed).toEqual(60);
+        driver.updateAvgSpeed(trip);
+        expect(driver.avgSpeed).toEqual(trip.speed);
+    });
+    test('updateAvgSpeed sets avgSpeed to -0 when milesDriven < trip.dist', () => {
+        const driver = new Driver('Test');
+        driver.name = 'Test';
+        driver.updateMilesDriven(50);
+        driver.updateAvgSpeed(new Trip('Test', 0, 100, 100));
+        expect(driver.avgSpeed).toEqual(-0);
     });
     test('updateAvgSpeed updates avgSpeed correctly with previous miles at the same speed', () => {
         const driver = new Driver('Test');
@@ -89,11 +97,12 @@ describe('Driver class', () => {
         driver.updateAvgSpeed(new Trip('Test', 0, 60, 60));
         expect(driver.avgSpeed).toEqual(60);
     });
-    test('updateAvgSpeed updates avgSpeed correctly with previous miles at a different speed', () => {
-        const driver = new Driver('Test');
-        driver.avgSpeed = 50;
-        driver.updateMilesDriven(600);
-        driver.updateAvgSpeed(new Trip('Test', 0, 100, 100));
-        expect(Math.round(driver.avgSpeed)).toEqual(52);
-    });
+    test('updateAvgSpeed using provided test case', () => {
+        const driver = new Driver('Dan');
+        driver.avgSpeed = 34.6;
+        driver.milesDriven = 17.3
+        driver.updateMilesDriven(21.8);
+        driver.updateAvgSpeed(new Trip('Dan', 372, 392, 21.8));
+        expect(Math.round(driver.avgSpeed)).toEqual(47);
+    })
 })
