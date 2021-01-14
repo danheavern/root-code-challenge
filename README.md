@@ -33,3 +33,11 @@ Anything time-related would take a bit of copnsideration in any project. For thi
 For this project I decided to use TDD; writing function definitions first, writing test cases second, and then implementing the functions to pass the tests. This development model cuts down on many simple mistakes, and writing tests first ensures that you consider the problem before writing any code.
 
 For the tests themselves, I made sure to consider normal cases and boundary cases, e.g. the function isValid is tested against a normal speed, 60mph, speeds near our boundaries, 4.999mph, 5mph, 100mph, 100.001mph, and far outside our boundaries, -60mph, 999999mph.
+
+## A Note on Performance and Sorting
+
+A part of this solution that may appear small but I believe to be of some interest is sorting. In my solution, I opted to wait until the read stream was closed, sort the array once, and then print the report.
+
+In this case, this works because we are reading in data and generating a report in one script. If these steps were removed, as would be the case in a system that stores Trips in a database and generates a report on a scheduled basis, it may be advantageous to store the trips in sorted order. Like how we chose to calculate Drivers' average speed each time they register a trip, this would reduce the amount of calculations needed to be done at the time of the report.
+
+However, the cost incurred by a sort is notably less impactful than the cost of calculating the average speed of each Driver, and it would be just as likely that we would want to sort the data by some other metric in the future, in which case it would not be beneficial to store the data in any particular order.
