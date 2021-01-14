@@ -102,6 +102,10 @@ export function generateReport(drivers: Array<Driver>) {
     });
 }
 
+/**
+ * main function - sets up readline, and handles each command.
+ * when done reading, the report is generated.
+ */
 export default function main() {
     var drivers: Array<Driver> = [];
     var trips: Array<Trip> = [];
