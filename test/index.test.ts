@@ -1,4 +1,4 @@
-import { addTrip, parseCommand, parseDriverCommand, parseTime, parseTripCommand, registerDriver } from "../src";
+import { addTrip, generateLine, parseCommand, parseDriverCommand, parseTime, parseTripCommand, registerDriver, sortByDescendingMiles, updateDrivers } from "../src";
 import { DRIVER_COMMAND, TRIP_COMMAND } from "../src/constants"
 import { Driver, Trip } from "../src/model";
 
@@ -75,5 +75,62 @@ describe('index.ts - main body of code', () => {
                 ))).toEqual(true);
         });
     });
-
+    describe('updateDrivers', () => {
+        test('updateDrivers returns array of Drivers', () => {
+            const drivers: Array<Driver> = [];
+            drivers.push(new Driver('Dan'));
+            drivers.push(new Driver('Lauren'));
+            drivers.push(new Driver('Kumi'));
+            const res = updateDrivers(drivers, new Trip('Dan', 0, 60, 60));
+            res.forEach(driver => {
+                expect(driver).toBeInstanceOf(Driver);
+            });
+        });
+        test('updateDriver returns array of length drivers.length', () => {
+            const drivers: Array<Driver> = [];
+            drivers.push(new Driver('Dan'));
+            drivers.push(new Driver('Lauren'));
+            drivers.push(new Driver('Kumi'));
+            const res = updateDrivers(drivers, new Trip('Dan', 0, 60, 60));
+            expect(res.length).toEqual(drivers.length);
+        });
+        test('updateDriver updates the driver specified in trip', () => {
+            const drivers: Array<Driver> = [];
+            drivers.push(new Driver('Dan'));
+            drivers.push(new Driver('Lauren'));
+            drivers.push(new Driver('Kumi'));
+            const res = updateDrivers(drivers, new Trip('Dan', 0, 60, 60));
+            expect(res.find(d => d.name === 'Dan').milesDriven).toEqual(60);
+            expect(res.find(d => d.name === 'Dan').avgSpeed).toEqual(60);
+        })
+    });
+    describe('generateReport', () => {
+        test('sort function returns Array<Driver> sorted by milesDriven, desc.', () => {
+            var drivers: Array<Driver> = [];
+            drivers.push(new Driver('Dan'));
+            drivers.push(new Driver('Lauren'));
+            drivers.push(new Driver('Kumi'));
+            drivers = updateDrivers(drivers, new Trip('Dan', 0, 60, 60));
+            drivers = updateDrivers(drivers, new Trip('Lauren', 0, 70, 70));
+            drivers = updateDrivers(drivers, new Trip('Kumi', 0, 80, 80));
+            //line to be tested
+            drivers.sort(sortByDescendingMiles);
+            expect(drivers.findIndex(d => d.name === 'Dan')).toEqual(2);
+            expect(drivers.findIndex(d => d.name === 'Lauren')).toEqual(1);
+            expect(drivers.findIndex(d => d.name === 'Kumi')).toEqual(0);
+        });
+        test('generateLine prints correct name', () => {
+            expect(generateLine(new Driver('Dan'))).toContain('Dan');
+        });
+        test('generateLine contains 0 miles and no average speed if milesDriven <= 0', () => {
+            expect(generateLine(new Driver('Dan'))).toContain('0 miles');
+            expect(generateLine(new Driver('Dan'))).not.toContain('mph');
+        });
+        test('generateLine contains miles and mph when milesDriven > 0', () => {
+            const driver = new Driver('Dan');
+            driver.updateDriver(new Trip('Dan', 0,60,60));
+            expect(generateLine(driver)).toContain('miles');
+            expect(generateLine(driver)).toContain('mph');
+        })
+    });
 });
