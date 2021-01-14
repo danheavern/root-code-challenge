@@ -55,7 +55,7 @@ export class Driver {
      * @param tripSpeed speed in mph to include in avg
      */
     updateAvgSpeed(trip: Trip) {
-        this.avgSpeed = this.avgSpeed * ((this.milesDriven - trip.dist) / this.milesDriven) + trip.speed * (trip.dist / this.milesDriven);
+        this.avgSpeed = this.milesDriven / (((this.milesDriven - trip.dist) / this.avgSpeed) + (trip.dist / trip.speed));
     }
 
     updateDriver(trip: Trip) {
