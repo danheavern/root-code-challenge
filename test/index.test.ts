@@ -35,24 +35,26 @@ describe('index.ts - main body of code', () => {
         });
     });
     describe('parseTime', () => {
+        test('parse 02:00', () => {
+            expect(parseTime('02:00')).toEqual(120);
+        })
         test('parse 12:30', () => {
             expect(parseTime('12:30')).toEqual(750);
         });
         test('parse 20:00', () => {
             expect(parseTime('20:00')).toEqual(1200);
-        })
+        });
     })
     describe('registerDriver', () => {
         test('registerDriver should return an array of length drivers.length + 1', () => {
-            expect(registerDriver([], new Driver)).toHaveLength(1);
+            expect(registerDriver([], new Driver('Test'))).toHaveLength(1);
         });
         test('registerDriver should return an array of Driver objects', () => {
-            const res = registerDriver([], new Driver);
+            const res = registerDriver([], new Driver('Test'));
             res.forEach(d => expect(d).toBeInstanceOf(Driver));
         });
         test('registerDriver should return an array which contains a Driver with the name provided', () => {
-            const driver = new Driver;
-            driver.name = 'Test';
+            const driver = new Driver('Test');
             expect(registerDriver([], driver).some(d => d.name === 'Test')).toBe(true);
         });
     });
