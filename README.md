@@ -28,10 +28,6 @@ To run the script with arbitrary files, run:
 
 Alternatively, the `npm start` script will attempt to run the above command with 'test.txt', which contains the provided test input and can be replaced/modified.
 
-To run the tests:
-
-`npm t`
-
 ## TypeScript and Jest
 
 I chose to complete this problem using TypeScript because it is a language I can quickly write and iterate in, and I have a good understanding of the style rules and idioms which will best demonstrate my ability. Additionally, I believe having strongly typed data helps reinforce deliberate and precise code.
@@ -51,6 +47,14 @@ Another consideration was adding a simple function in the Trip class to tell us 
 Anything time-related would take a bit of copnsideration in any project. For this example, the smallest denomination of time in the input is minutes, which I decided to store time in minutes. This could result in confusion when calculating miles/hour, so I made sure to take that into consideration when writing my test cases. As an additional measure, I included Trip.speed as a getter which calculates the speed. Having this done in a getter, which is tested, further protects from conversion errors.
 
 ## Testing
+
+To run the tests:
+
+`npm t`
+
+To generate a coverage report:
+
+`jest --coverage=true`
 
 For this project I decided to use TDD; writing function definitions first, writing test cases second, and then implementing the functions to pass the tests. This development model cuts down on many simple mistakes, and writing tests first ensures that you consider the problem before writing any code.
 
