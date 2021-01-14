@@ -13,7 +13,7 @@ export class Trip {
         driverName: string, //name of driver
         start: number,      //start time in minutes
         end: number,        //end time in minutes
-        dist: number       //distance travelled in miles
+        dist: number        //distance travelled in miles
     ) {
         this.driverName = driverName;
         this.start = start;
@@ -31,24 +31,36 @@ export class Trip {
 
 export class Driver {
     name: string;
-    totalTrips: number;      //total trips taken - used in updating average speed
     milesDriven?: number;    //total miles driven
     avgSpeed?: number;       //average speed in mph
 
-    /**
-     * Update *avgSpeed* using a new trip speed, increments totalTrips
-     * @param tripSpeed speed in mph to include in avg
-     */
-    updateAvgSpeed(tripSpeed: number){
-        this.totalTrips = this.totalTrips ? this.totalTrips + 1 : 1;
-        this.avgSpeed = this.avgSpeed ? this.avgSpeed * ((this.totalTrips - 1) / this.totalTrips) + (tripSpeed / this.totalTrips) : tripSpeed;
+    constructor(name: string) {
+        this.name = name;
+        this.milesDriven = 0;
+        this.avgSpeed = 0;
     }
 
     /**
-     * Updates *milesDriven*, adding *miles* to the total 
+     * Updates *milesDriven*, adding *miles* to the total
+     * Runs before updating the new average speed
      * @param miles miles to be added
      */
-    updateMilesDriven(miles: number){
-        this.milesDriven ? this.milesDriven+= miles : this.milesDriven = miles;
+    updateMilesDriven(miles: number) {
+        this.milesDriven+= miles;
+    }
+
+     /**
+     * Update *avgSpeed* using a new trip speed.
+     * Runs after *updateMilesDriven*, so the calculation uses this.milesDriven and the trip distance to adjust the average.
+     * @param tripSpeed speed in mph to include in avg
+     */
+    updateAvgSpeed(trip: Trip) {
+        this.avgSpeed = this.avgSpeed * ((this.milesDriven - trip.dist) / this.milesDriven) + trip.speed * (trip.dist / this.milesDriven);
+    }
+
+    updateDriver(trip: Trip) {
+        //updateAvgSpeed is dependent on having the current mile total, so update milesDriven first.
+        this.updateMilesDriven(trip.dist);
+        this.updateAvgSpeed(trip);
     }
 }
