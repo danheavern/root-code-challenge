@@ -52,10 +52,15 @@ export class Driver {
      /**
      * Update *avgSpeed* using a new trip speed.
      * Runs after *updateMilesDriven*, so the calculation uses this.milesDriven and the trip distance to adjust the average.
-     * @param tripSpeed speed in mph to include in avg
+     * this.milesDriven must be greater than trip.dist
+     * @param trip trip used to update avg
      */
     updateAvgSpeed(trip: Trip) {
-        this.avgSpeed = this.milesDriven / (((this.milesDriven - trip.dist) / this.avgSpeed) + (trip.dist / trip.speed));
+        if(this.milesDriven !== trip.dist) {
+            this.avgSpeed = this.milesDriven / (((this.milesDriven - trip.dist) / this.avgSpeed) + (trip.dist / trip.speed));
+        } else {
+            this.avgSpeed = trip.speed;
+        }
     }
 
     updateDriver(trip: Trip) {
