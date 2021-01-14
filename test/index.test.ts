@@ -1,4 +1,4 @@
-import { addTrip, generateLine, parseCommand, parseDriverCommand, parseTime, parseTripCommand, registerDriver, sortByDescendingMiles, updateDrivers } from "../src";
+import { addTrip, generateLine, parseCommand, parseDriverCommand, parseTime, parseTripCommand, registerDriver, sortByDescendingMiles, updateDrivers } from "..";
 import { DRIVER_COMMAND, TRIP_COMMAND } from "../src/constants"
 import { Driver, Trip } from "../src/model";
 

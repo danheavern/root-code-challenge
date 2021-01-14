@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "start": "ts-node src/index.ts < test.txt",
+    "start": "ts-node index.ts < test.txt",
     "test": "jest"
   },
   "author": "anonymous",

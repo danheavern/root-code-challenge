@@ -1,5 +1,5 @@
-import { DRIVER_COMMAND, TRIP_COMMAND } from "./constants";
-import { Driver, Trip } from "./model";
+import { DRIVER_COMMAND, TRIP_COMMAND } from "./src/constants";
+import { Driver, Trip } from "./src/model";
 import * as readline from 'readline';
 
 main();
