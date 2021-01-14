@@ -1,14 +1,36 @@
 # root-code-challenge
 
-## Sections
+## Jump To
 
-[1. TypeScript and Jest](#type-script-and-jest)
+[1. Running the script](#running-the-script)
 
-[2. Trips and Drivers](#trips-and-drivers)
+[2. TypeScript and Jest](#typescript-and-jest)
 
-[3. Representing time](#representing-time)
+[3. Trips and Drivers](#trips-and-drivers)
 
-[4. Testing](#testing)
+[4. Representing time](#representing-time)
+
+[5. Testing](#testing)
+
+[6. A Note on Performance and Sorting](#a-note-on-performance-and-sorting)
+
+## Running the Script
+
+This project uses typescript ts-node, if you don't have that installed you can run:
+
+`npm install -g typescript ts-node`
+
+To run the script with arbitrary files, run:
+
+`npm install`
+
+`ts-node index < {filename}`
+
+Alternatively, the `npm start` script will attempt to run the above command with 'test.txt', which contains the provided test input and can be replaced/modified.
+
+To run the tests:
+
+`npm t`
 
 ## TypeScript and Jest
 
@@ -33,6 +55,8 @@ Anything time-related would take a bit of copnsideration in any project. For thi
 For this project I decided to use TDD; writing function definitions first, writing test cases second, and then implementing the functions to pass the tests. This development model cuts down on many simple mistakes, and writing tests first ensures that you consider the problem before writing any code.
 
 For the tests themselves, I made sure to consider normal cases and boundary cases, e.g. the function isValid is tested against a normal speed, 60mph, speeds near our boundaries, 4.999mph, 5mph, 100mph, 100.001mph, and far outside our boundaries, -60mph, 999999mph.
+
+If this example was extended, I would seperate the Trip and Driver class tests into seperate test files, but for simplicity, I left the class functions together in models.test.ts and the tests for the functions in our main script in index.test.ts. This brings up the point of organization, which could also be improved by seperating areas of concern into their own classes/files. For simplicity, I limited the scope to one file for the script and another for the object classes (index.ts and models.ts).
 
 ## A Note on Performance and Sorting
 
