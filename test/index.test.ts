@@ -1,4 +1,4 @@
-import { addTrip, generateLine, parseCommand, parseDriverCommand, parseTime, parseTripCommand, registerDriver, sortByDescendingMiles, updateDrivers } from "..";
+import { addTrip, generateLine, generateReport, parseCommand, parseDriverCommand, parseTime, parseTripCommand, registerDriver, sortByDescendingMiles, updateDrivers } from "..";
 import { DRIVER_COMMAND, TRIP_COMMAND } from "../src/constants"
 import { Driver, Trip } from "../src/model";
 
@@ -105,6 +105,14 @@ describe('index.ts - main body of code', () => {
         })
     });
     describe('generateReport', () => {
+        test('generateReport prints line correctly', () => {
+            const driver = new Driver('Test');
+            driver.milesDriven = 100;
+            driver.avgSpeed = 60;
+            console.log = jest.fn();
+            generateReport([driver]);
+            expect(console.log).toHaveBeenCalledWith('Test: 100 miles @ 60 mph');
+        })
         test('sort function returns Array<Driver> sorted by milesDriven, desc.', () => {
             var drivers: Array<Driver> = [];
             drivers.push(new Driver('Dan'));
@@ -131,6 +139,7 @@ describe('index.ts - main body of code', () => {
             driver.updateDriver(new Trip('Dan', 0,60,60));
             expect(generateLine(driver)).toContain('miles');
             expect(generateLine(driver)).toContain('mph');
-        })
+        });
+
     });
 });
