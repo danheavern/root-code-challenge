@@ -16,7 +16,7 @@
 
 ## Running the Script
 
-This project uses typescript ts-node, if you don't have that installed you can run:
+This project uses typescript and ts-node, if you don't have that installed you can run:
 
 `npm install -g typescript ts-node`
 
