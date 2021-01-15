@@ -1,9 +1,11 @@
-import { DRIVER_COMMAND, TRIP_COMMAND } from "../src/constants"
-import { Driver, Trip, Report, sortByDescendingMiles } from "../src/model";
-import * as readline from 'readline';
+import { DRIVER_COMMAND, sortByDescendingMiles, TRIP_COMMAND } from "../src/constants";
+import { Driver } from "../src/driver";
+import { Report } from "../src/report";
+import { Trip } from "../src/trip";
 
 var report: Report = new Report;
 
+//Report tests
 describe('Report', () => {
     beforeEach(() => {
         report = new Report;
