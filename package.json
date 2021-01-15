@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "ts-node index.ts < test.txt",
-    "test": "jest"
+    "test": "jest --coverage=true"
   },
   "author": "anonymous",
   "license": "ISC",
